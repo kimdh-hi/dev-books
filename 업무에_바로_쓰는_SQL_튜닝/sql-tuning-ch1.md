@@ -9,10 +9,12 @@ select @@version;
 ```
 
 > 2021 DB엔진 영향력 순위
-1위: MySQL 58%
+```
+1위: MySQL 58% 
 2위: PostgreSQL 27%
 3위: SQLite
 5위: MariaDB 5%
+```
 
 
 ### MySQL와 Oracle의 차이
@@ -35,9 +37,11 @@ MySQL DB
 
 
 > 쿼리 오프로딩
+```
 쓰기 트랜잭션과 읽기 트랜잭션을 분리해서 DB 처리량을 증가시키는 기법이다.
 쓰기 트랜잭션: Update, Insert, Delete    
 읽기 트랜잭션: Select
+```
 
 
 #### Join의 차이
@@ -83,4 +87,97 @@ select NOW() as date;
 select SYSDATE as date 
 FROM dual;
 ```
+
+**조건문**
+- MySQL: `IF`, `WHEN~THEN`
+```sql
+select IF(컬럼명1='apple', 'A', '-') 
+from 테이블;
+```
+- Oracle: `DECODE`, `IF`, `CASE WHEN~THEN`
+```sql
+select DECODE(칼럼명1, 'apple', 'A', '-') 
+from 테이블;
+```
+
+**날짜 형식**
+- MySQL: `DATE_FORMAT()`
+```sql
+select DATE_FORMAT(NOW(), '%Y%m%d %H%i%s') as date;
+```
+- Oracle: `TO_CHAR()`
+```sql
+select TO_CHAR(SYSDATE, 'YYYYMMDD') as date
+from DUAL;
+```
+
+**자동 증가값**
+- MariaDB, Oracle은 `시퀀스`를 사용
+- MySQL은 `auto_increment` 혹은 `시퀀스`를 사용한다.
+
+- 1부터 9999까지 1씩 증가하는 시퀀스 생성
+```sql
+CREATE SEQUENCE 시퀀스명
+increment by 1
+start with 1
+minvalue 1
+maxvalue 9999
+cycle
+cache
+
+// MySQL, MariaDB에서 다음 시퀀스 값 가져오기
+SELECT NEXTVAL(시퀀스명); 
+
+// Oracle에서 다음 시퀀스 값 가져오기
+SELECT 시퀀스명.NEXTVAL from dual;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
